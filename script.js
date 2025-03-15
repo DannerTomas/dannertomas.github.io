@@ -85,15 +85,15 @@ function updateImagesForDarkMode(isDarkMode) {
         if (src) {
             if (isDarkMode) {
                 // 检查是否已经是深色模式图片
-                if (!src.toLowerCase().endsWith('_dark.jpg')) {
-                    // 替换.png为_dark.jpg
-                    img.setAttribute('src', src.replace(/\.png$/i, '_dark.jpg'));
+                if (!src.toLowerCase().endsWith('_dark.png')) {
+                    // 替换.png为_dark.png
+                    img.setAttribute('src', src.replace(/\.png$/i, '_dark.png'));
                 }
             } else {
                 // 如果是深色模式图片，恢复为浅色模式
-                if (src.toLowerCase().endsWith('_dark.jpg')) {
-                    // 替换_dark.jpg为.png
-                    img.setAttribute('src', src.replace(/_dark\.jpg$/i, '.png'));
+                if (src.toLowerCase().endsWith('_dark.png')) {
+                    // 替换_dark.png为.png
+                    img.setAttribute('src', src.replace(/_dark\.png$/i, '.png'));
                 }
             }
         }
