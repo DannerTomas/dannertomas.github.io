@@ -50,7 +50,7 @@
                 <p>呆梨教务是适用于太原理工大学学生的第三方教务系统微信小程序，提供成绩查询、课表查询、远程开门和扫码支付等特色功能。</p>
                 <div class="cta-buttons">
                     <a href="#features" class="btn btn-primary">了解功能</a>
-                    <a href="#" class="btn btn-secondary">立即体验</a>
+                    <a href="#" class="btn btn-secondary" id="experience-btn">立即体验</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -87,7 +87,7 @@
                 <div class="feature-card highlight">
                     <span class="material-icons">qr_code_scanner</span>
                     <h3>扫码支付</h3>
-                    <p>支持校园内扫码支付，便捷完成各类缴费</p>
+                    <p>支持虚拟校园卡，便捷完成各类支付场景</p>
                 </div>
             </div>
         </div>
@@ -122,7 +122,7 @@
                 <div class="feature-content">
                     <h2>远程开门</h2>
                     <p>再也不用担心忘带钥匙！通过小程序即可远程开启宿舍门，操作简单，响应迅速，让您的校园生活更加便捷。</p>
-                    <p>同时支持支付码展示，通过小程序扫码即可完成支付，支持餐厅、超市等多种场景。</p>
+                    <p>同时支持虚拟校园卡，通过小程序出示付款码即可完成支付，支持餐厅、超市等多种场景。</p>
                     <ul class="feature-details">
                         <li><span class="material-icons">check_circle</span>一键开启，响应迅速</li>
                         <li><span class="material-icons">check_circle</span>安全加密，防止盗用</li>
@@ -193,7 +193,7 @@
                         <div class="avatar"></div>
                         <div class="user-info">
                             <h4>王同学</h4>
-                            <p>机械工程 大四</p>
+                            <p>机械电子工程 大三</p>
                         </div>
                     </div>
                 </div>
@@ -208,9 +208,19 @@
                     <div class="developer-item">
                         <span class="material-icons">code</span>
                         <div class="developer-content">
-                            <h3>逆向工程&后端</h3>
+                            <h3>算法逆向&后端开发</h3>
                             <p>Kokomi</p>
-                            <p class="school-info">太原理工大学 - 机械电子工程22级</p>
+                            <p class="school-info">太原理工大学</p>
+                            <p class="school-info">机械电子工程 22级</p>
+                        </div>
+                    </div>
+                    <div class="developer-item">
+                        <span class="material-icons">code</span>
+                        <div class="developer-content">
+                            <h3>软件测试</h3>
+                            <p>Socky_米饭</p>
+                            <p class="school-info">太原理工大学</p>
+                            <p class="school-info">智能测控 22级</p>
                         </div>
                     </div>
                     <div class="developer-item">
@@ -218,7 +228,8 @@
                         <div class="developer-content">
                             <h3>前端开发</h3>
                             <p>VIP</p>
-                            <p class="school-info">太原工业学院 - 软件工程22级</p>
+                            <p class="school-info">太原工业学院</p>
+                            <p class="school-info">软件工程 22级</p>
                         </div>
                     </div>
                     <div class="developer-item">
@@ -226,7 +237,8 @@
                         <div class="developer-content">
                             <h3>UI设计</h3>
                             <p>Muyuan</p>
-                            <p class="school-info">山东建筑大学 - 软件工程24级</p>
+                            <p class="school-info">山东建筑大学</p>
+                            <p class="school-info">软件工程 24级</p>
                         </div>
                     </div>
                 </div>
@@ -242,7 +254,7 @@
                         <span class="material-icons">email</span>
                         <div class="contact-content">
                             <h3>邮箱</h3>
-                            <p>dannertomas@qq.com</p>
+                            <p>dannertomas@vip.qq.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -256,7 +268,7 @@
                         <span class="material-icons">group</span>
                         <div class="contact-content">
                             <h3>QQ群</h3>
-                            <p>12345678（1群）</p>
+                            <p>1030145645（1群）</p>
                         </div>
                     </div>
                 </div>
@@ -339,13 +351,13 @@
     .developers-row {
         display: flex;
         justify-content: center;
-        gap: 3rem;
-        flex-wrap: wrap;
+        gap: 1.5rem;
+        flex-wrap: nowrap;
     }
     
     .developer-item {
-        flex: 0 1 280px;
-        padding: 2rem;
+        flex: 0 1 220px;
+        padding: 1.5rem;
         border-radius: 12px;
         background-color: var(--bg-card);
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -382,6 +394,17 @@
         margin-top: 0;
     }
     
+    @media (max-width: 992px) {
+        .developers-row {
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .developer-item {
+            flex: 0 1 calc(50% - 2rem);
+        }
+    }
+    
     @media (max-width: 768px) {
         .developers-row {
             flex-direction: column;
@@ -393,6 +416,77 @@
         }
     }
     </style>
+    
+    <!-- 提示框样式 -->
+    <style>
+    .qrcode-tooltip {
+        position: fixed;
+        visibility: hidden;
+        opacity: 0;
+        z-index: 1000;
+        background-color: white;
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        max-width: 220px;
+        width: 100%;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    }
+    
+    /* 确保提示框文字在任何主题下都是深色 */
+    .qrcode-tooltip .qrcode-text {
+        color: #333333;
+        margin: 0;
+        font-size: 14px;
+        text-align: center;
+    }
+    
+    /* 深色模式下的特殊调整 */
+    [data-theme="dark"] .qrcode-tooltip .qrcode-text {
+        color: #333333;
+    }
+    
+    .qrcode-tooltip.visible {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .tooltip-arrow {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid white;
+        top: -8px;
+        bottom: -8px;
+        left: 50%;
+        margin-left: -8px;
+    }
+    
+    .qrcode-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .qrcode-image {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .qrcode-image img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+    </style>
+    
     <footer class="app-footer">
         <div class="container">
             <div class="footer-content">
@@ -421,18 +515,28 @@
                         <h3>关注我们</h3>
                         <ul>
                             <li><a href="#">微信公众号</a></li>
-                            <li><a href="#">微博</a></li>
                             <li><a href="#">QQ群</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 呆梨教务 版权所有</p>
-                <p>太原理工大学第三方教务系统 - 非官方应用</p>
+                <p>&copy; 2025 呆梨教务</p>
             </div>
         </div>
     </footer>
+
+    <!-- 微信小程序码提示框 -->
+    <div class="qrcode-tooltip" id="qrcode-tooltip">
+        <div class="tooltip-arrow"></div>
+        <div class="qrcode-container">
+            <div class="qrcode-image">
+                <!-- 替换为实际的小程序码图片 -->
+                <img src="images/qrcode.jpg" alt="微信小程序码" />
+            </div>
+            <p class="qrcode-text">微信扫码立即体验</p>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

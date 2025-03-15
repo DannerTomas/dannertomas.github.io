@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 添加元素进入视图时的动画
     initScrollAnimations();
+    
+    // 初始化微信小程序码提示框
+    initQRCodeTooltip();
 });
 
 // 初始化主题设置
@@ -260,4 +263,65 @@ window.addEventListener('load', function() {
     setTimeout(() => {
         document.querySelector('.hero-image').classList.add('fade-in');
     }, 300);
-}); 
+});
+
+// 初始化微信小程序码提示框
+function initQRCodeTooltip() {
+    const experienceBtn = document.getElementById('experience-btn');
+    const qrcodeTooltip = document.getElementById('qrcode-tooltip');
+    
+    if (!experienceBtn || !qrcodeTooltip) return;
+    
+    // 鼠标移入按钮时显示提示框
+    experienceBtn.addEventListener('mouseenter', function() {
+        // 获取按钮位置
+        const btnRect = experienceBtn.getBoundingClientRect();
+        
+        // 设置提示框位置（居中在按钮下方）
+        qrcodeTooltip.style.left = btnRect.left + (btnRect.width / 2) - (qrcodeTooltip.offsetWidth / 2) + 'px';
+        qrcodeTooltip.style.top = btnRect.bottom + 10 + 'px';
+        
+        // 显示提示框
+        qrcodeTooltip.classList.add('visible');
+    });
+    
+    // 鼠标移出按钮时隐藏提示框
+    experienceBtn.addEventListener('mouseleave', function() {
+        qrcodeTooltip.classList.remove('visible');
+    });
+    
+    // 鼠标移入提示框时保持显示
+    qrcodeTooltip.addEventListener('mouseenter', function() {
+        qrcodeTooltip.classList.add('visible');
+    });
+    
+    // 鼠标移出提示框时隐藏
+    qrcodeTooltip.addEventListener('mouseleave', function() {
+        qrcodeTooltip.classList.remove('visible');
+    });
+    
+    // 窗口调整大小时重新定位提示框
+    window.addEventListener('resize', function() {
+        if (qrcodeTooltip.classList.contains('visible')) {
+            const btnRect = experienceBtn.getBoundingClientRect();
+            qrcodeTooltip.style.left = btnRect.left + (btnRect.width / 2) - (qrcodeTooltip.offsetWidth / 2) + 'px';
+            qrcodeTooltip.style.top = btnRect.bottom + 10 + 'px';
+        }
+    });
+    
+    // 添加触摸设备支持
+    experienceBtn.addEventListener('touchstart', function(e) {
+        // 阻止默认行为以防止触发点击
+        e.preventDefault();
+        
+        // 获取按钮位置
+        const btnRect = experienceBtn.getBoundingClientRect();
+        
+        // 设置提示框位置
+        qrcodeTooltip.style.left = btnRect.left + (btnRect.width / 2) - (qrcodeTooltip.offsetWidth / 2) + 'px';
+        qrcodeTooltip.style.top = btnRect.bottom + 10 + 'px';
+        
+        // 切换提示框可见性
+        qrcodeTooltip.classList.toggle('visible');
+    });
+} 

@@ -316,10 +316,31 @@ input:checked + .slider:before {
 /* 英雄部分 */
 .hero-section {
     padding: 120px 0 80px;
-    background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-light) 100%);
-    color: white;
     position: relative;
     overflow: hidden;
+    color: white;
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    background-image: linear-gradient(
+        135deg, 
+        var(--primary-light) 0%, 
+        var(--accent-light) 25%, 
+        var(--primary-color) 50%,
+        var(--accent-color) 75%,
+        var(--primary-light) 100%
+    );
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .hero-section::before {
@@ -884,4 +905,19 @@ input:checked + .slider:before {
 
 .fade-in {
     animation: fadeIn 0.5s var(--transition-timing);
+}
+
+[data-theme="dark"] .hero-section {
+    background-image: linear-gradient(
+        135deg, 
+        var(--primary-dark) 0%, 
+        var(--accent-dark) 25%, 
+        var(--primary-color) 50%,
+        var(--accent-color) 75%,
+        var(--primary-dark) 100%
+    );
+}
+
+[data-theme="dark"] .hero-section::before {
+    background-color: rgba(0, 0, 0, 0.2);
 } 
